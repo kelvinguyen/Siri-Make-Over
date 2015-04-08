@@ -19,9 +19,6 @@ namespace Capstone1.Model
             StreamReader sr = new StreamReader(response.GetResponseStream());
             string str = sr.ReadToEnd();
             sr.Close();
-
-
-
             return str;
         }
 
@@ -85,5 +82,34 @@ namespace Capstone1.Model
             }
            
         }
+
+        //take out the whole div
+        public string analysisTheContentDiv(string url)
+        {
+            string reg = @"<div .*?>.*?</div>";
+            
+            string source = getSourceCode(url);
+            MatchCollection m1 = Regex.Matches(source, reg, RegexOptions.Singleline);
+            string result = "";
+            foreach (Match group in m1)
+            {
+                //string data = Regex.Replace(group.Value, @"<(.|\n)*?>", string.Empty);
+                //result += data + " \n";
+                //result += group.Value + "\n\n\n\n";
+                string link = collectLinkInDiv(group);
+                result += link + "\n\n\n\n";
+            }
+            return result;
+        }
+
+        public string collectLinkInDiv(Match group)
+        {
+            Regex linkReg = new Regex(@"href=""/.*?""");
+            Match matchLink = linkReg.Match(group.Value);
+            string link = matchLink.Value.ToLower();
+           return (link.Contains("http://") || link.Contains("https://")||link.Contains("www."))? matchLink.Value.Replace("href=\"/url?q=","").Replace("\"","") :null;
+            
+        }
+
     }
 }

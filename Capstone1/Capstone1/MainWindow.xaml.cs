@@ -44,8 +44,9 @@ namespace Capstone1
                // RichText.Document.Blocks.Clear();
                 contentList["address"] = EnterBox.Text;
                 RichText.Document.Blocks.Clear();
-                string content = wc.getContentOnly(str + EnterBox.Text);
+                //string content = wc.getContentOnly(str + EnterBox.Text);
                 //string content = wc.getAllConnectingUrl2(str + EnterBox.Text);
+                string content = wc.analysisTheContentDiv(str + EnterBox.Text);
 
                 Paragraph p = new Paragraph(new Run(content));
                 RichText.Document.Blocks.Add(p);
