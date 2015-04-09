@@ -97,7 +97,11 @@ namespace Capstone1.Model
                 //result += data + " \n";
                 //result += group.Value + "\n\n\n\n";
                 string link = collectLinkInDiv(group);
-                result += link + "\n\n\n\n";
+                if (link != null)
+                {
+                    result += link + "\n\n\n\n";
+                }
+                
             }
             return result;
         }
@@ -105,9 +109,35 @@ namespace Capstone1.Model
         public string collectLinkInDiv(Match group)
         {
             Regex linkReg = new Regex(@"href=""/.*?""");
+            
+            //Regex fixlink = new Regex(@"http://.*?http");
+           
             Match matchLink = linkReg.Match(group.Value);
             string link = matchLink.Value.ToLower();
-           return (link.Contains("http://") || link.Contains("https://")||link.Contains("www."))? matchLink.Value.Replace("href=\"/url?q=","").Replace("\"","") :null;
+            string final = "";
+            if (link.Contains("http://") || link.Contains("https://") || link.Contains("www."))
+            {
+                string linkReg2 = @"https?://.*?/(\D)+";
+                MatchCollection secondMatch = Regex.Matches(link, linkReg2, RegexOptions.Singleline);
+                int count = 0;
+                foreach (Match finalLink in secondMatch)
+                {
+                    if (count == 1)
+                    {
+                        final += finalLink.Value.Substring(0,finalLink.Value.Length-1);
+                    }
+                    count++;
+                }
+                return final;
+            }
+            //link = link.Replace("href=\"/url?q=", "").Replace("\"", "");
+            //Match fixlink1 = fixlink.Match(link);
+            //string why = fixlink1.Value;
+           // string shouldbe = secondMatch.Value;
+
+           
+           //return (link.Contains("http://") || link.Contains("https://")||link.Contains("www."))? link :null;
+            return null;
             
         }
 
