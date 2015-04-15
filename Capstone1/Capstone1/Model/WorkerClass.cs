@@ -12,6 +12,7 @@ namespace Capstone1.Model
 {
     public class WorkerClass
     {
+        public string Question { get; set; }
         public string getSourceCode(string url)
         {
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
@@ -98,12 +99,12 @@ namespace Capstone1.Model
                 //Collect link in diff
                 string link = collectLinkInDiv(group);
                 string cite = collectCiteinDiv(group);
-                if (link != null)
+                if (link != null && !link.Contains(" "))
                 {
                     //result += "Link: " + link +"\n";
                     linkArr.Add(link);
                 }
-                if (!cite.Equals(""))
+                if (!cite.Contains(" ") && cite != null)
                 {
                     //result += "Cite: " + cite + "\n";
                     citeArr.Add(cite);
@@ -118,7 +119,8 @@ namespace Capstone1.Model
             linkObj.Link = linkArr;
             linkObj.Cite = citeArr;
             List<string> finalLink = linkObj.OptimizeLink();
-            //ContentData dataList = new ContentData(finalLink);
+            ContentData dataList = new ContentData(finalLink,Question);
+            result = dataList.CollectDataAllLink();
             //result = dataList.CollectDataPerLink(finalLink[0]);
             //foreach (string x in finalLink)
             //{

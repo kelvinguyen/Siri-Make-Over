@@ -14,20 +14,36 @@ namespace Capstone1.Model
         public List<string> OptimizeLink()
         {
             List<string> optLink = new List<string>();
-            
-            foreach(string c in Cite)
+            string http = "http://";
+            string https = "https://";
+            for (int i = 0; i < Cite.Count;i++ )
             {
-                // ignore http://www.
-                if (Link.Contains(c))
+                if (!Cite[i].Contains(http) && !Cite[i].Contains(https))
                 {
-                    Link.Remove(c);
+                    Cite[i] = http + Cite[i];
                 }
-                optLink.Add(c);
-            }
-            foreach (string l in Link)
-            {
+
+                if (Cite[i].Contains(".") && !Cite[i].Contains("...") && !Cite[i].Contains("/_/"))
+                {
+                    optLink.Add(Cite[i]);
+                }
+                //if (Link.Contains(http))
+                //{
+                //    Link.Remove(c);
+                //}
                
-                optLink.Add(l);
+            }
+            for (int i = 0; i < Link.Count;i++ )
+            {
+                if (!Link[i].Contains(http) && !Link[i].Contains(https))
+                {
+                    Link[i] = http + Link[i];
+                }
+                if (Link[i].Contains(".") && !Link[i].Contains("...") && !Link[i].Contains("/_/"))
+                {
+                    optLink.Add(Link[i]);
+                }
+               
             }
             return optLink;
         }

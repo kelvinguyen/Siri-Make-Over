@@ -32,7 +32,7 @@ namespace Capstone1
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             WorkerClass wc = new WorkerClass();
-            ContentData cd = new ContentData();
+            //ContentData cd = new ContentData();
 
             //RichText.Text = wc.getSourceCode("www.google.com");
             //.RichText.RichText.t = wc.getSourceCode("www.google.com");
@@ -47,8 +47,9 @@ namespace Capstone1
                 RichText.Document.Blocks.Clear();
                 //string content = wc.getContentOnly(str + EnterBox.Text);
                 //string content = wc.getAllConnectingUrl2(str + EnterBox.Text);
-                //string content = wc.analysisTheContentDiv(str + EnterBox.Text);
-                string content = cd.CollectDataPerLink("http://www.encyclopedia.com/topic/Bill_Gates.aspx");
+                wc.Question = EnterBox.Text;
+                string content = wc.analysisTheContentDiv(str + EnterBox.Text);
+               // string content = cd.CollectDataPerLink("http://www.encyclopedia.com/topic/Bill_Gates.aspx");
                 Paragraph p = new Paragraph(new Run(content));
                 RichText.Document.Blocks.Add(p);
 
