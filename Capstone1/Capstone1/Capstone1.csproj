@@ -71,6 +71,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\ContentData.cs" />
+    <Compile Include="Model\LinkObject.cs" />
     <Compile Include="Model\WorkerClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

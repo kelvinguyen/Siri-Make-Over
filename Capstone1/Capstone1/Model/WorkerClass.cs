@@ -67,8 +67,6 @@ namespace Capstone1.Model
                 foreach (var tag in aTags)
                 {
                     result += count + "." + tag.InnerHtml+"\n";
-
-                    result += count + ". " + tag.InnerHtml + " - " + tag.Attributes["href"].Value + "\n";
                      //HtmlAttribute col = tag.Attributes["href"] ;
                      //result += col.Value;
                     
@@ -78,7 +76,7 @@ namespace Capstone1.Model
             }
             else
             {
-                return "nothing";
+                return "NOTHING";
             }
            
         }
@@ -91,21 +89,59 @@ namespace Capstone1.Model
             string source = getSourceCode(url);
             MatchCollection m1 = Regex.Matches(source, reg, RegexOptions.Singleline);
             string result = "";
+            string result2 = "";
+            LinkObject linkObj = new LinkObject();
+            List<string> linkArr = new List<string>();
+            List<string> citeArr = new List<string>();
             foreach (Match group in m1)
             {
-                //string data = Regex.Replace(group.Value, @"<(.|\n)*?>", string.Empty);
-                //result += data + " \n";
-                //result += group.Value + "\n\n\n\n";
+                //Collect link in diff
                 string link = collectLinkInDiv(group);
+                string cite = collectCiteinDiv(group);
                 if (link != null)
                 {
-                    result += link + "\n\n\n\n";
+                    //result += "Link: " + link +"\n";
+                    linkArr.Add(link);
                 }
+                if (!cite.Equals(""))
+                {
+                    //result += "Cite: " + cite + "\n";
+                    citeArr.Add(cite);
+                }
+                //result += "New Div====\n";
+                //LinkObject linkObject = new LinkObject() { Link = link, Cite = cite };
+                //result += linkObject.optimizeLinkDecision()+"\n\n";
+                //linkArr.Add(link);
+                //linkArr.Add(cite);
                 
             }
+            linkObj.Link = linkArr;
+            linkObj.Cite = citeArr;
+            List<string> finalLink = linkObj.OptimizeLink();
+            //ContentData dataList = new ContentData(finalLink);
+            //result = dataList.CollectDataPerLink(finalLink[0]);
+            //foreach (string x in finalLink)
+            //{
+
+            //    result += x + "\n\n";
+            //}
             return result;
         }
 
+        //get all the span data
+        public string collectCiteinDiv(Match group)
+        {
+            string reg = @"(<cite.*?>.*?</cite>)";
+            MatchCollection m1 = Regex.Matches(group.Value, reg, RegexOptions.Singleline);
+            string result = "";
+            foreach (Match span in m1)
+            {
+                string data = Regex.Replace(span.Value, @"<(.|\n)*?>", string.Empty);
+                result += data;
+            }
+            return result;
+        }
+        //collect link in div
         public string collectLinkInDiv(Match group)
         {
             Regex linkReg = new Regex(@"href=""/.*?""");
