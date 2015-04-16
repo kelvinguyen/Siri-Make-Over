@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using HtmlAgilityPack;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Capstone1.Model
 {
@@ -23,7 +24,7 @@ namespace Capstone1.Model
             string result = "";
             foreach (string s in linkList)
             {
-                Console.WriteLine("the link : {0}",s);
+               // Console.WriteLine("the link : {0}",s);
                 result += CollectDataPerLink(s);
             }
             return result;
@@ -62,8 +63,10 @@ namespace Capstone1.Model
                 {
                     if (node != null && IsContainQuestionAnswer(node))
                     {
-                        list.Add(node.InnerText);
-                        result += node.InnerText + "\n--------------------------------------------------------";
+                        string testing = "";
+                        testing = Regex.Replace(node.InnerText, @"[\s]", " ");
+                        list.Add(testing);
+                        result += testing + "\n--------------------------------------------------------";
                     }
 
                 }
