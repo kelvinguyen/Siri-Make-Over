@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using Capstone1.Metric;
 
 namespace Capstone1.Model
 {
@@ -83,7 +84,7 @@ namespace Capstone1.Model
         }
 
         //take out the whole div
-        public string analysisTheContentDiv(string url)
+        public List<string> analysisTheContentDiv(string url)
         {
             string reg = @"<div .*?>.*?</div>";
             
@@ -120,14 +121,16 @@ namespace Capstone1.Model
             linkObj.Cite = citeArr;
             List<string> finalLink = linkObj.OptimizeLink();
             ContentData dataList = new ContentData(finalLink,Question);
-            result = dataList.CollectDataAllLink();
+            //result = dataList.CollectDataAllLink();
             //result = dataList.CollectDataPerLink(finalLink[0]);
             //foreach (string x in finalLink)
             //{
 
             //    result += x + "\n\n";
             //}
-            return result;
+            //ContentComparationMetric testing = new ContentComparationMetric();
+            //result = testing.IsContentMatching(new List<string>() { "I" }, "hippo milk pink");
+            return dataList.CollectDataAllLink();
         }
 
         //get all the span data

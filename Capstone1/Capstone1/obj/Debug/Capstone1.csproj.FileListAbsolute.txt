@@ -30,3 +30,4 @@ C:\Users\Kelvin Nguyen\Documents\Neumont Document\Q7\Capstone q7\Capstone1\Capst
 C:\Users\Kelvin Nguyen\Documents\Neumont Document\Q7\Capstone q7\Capstone1\Capstone1\obj\Debug\Capstone1.g.resources
 C:\Users\Kelvin Nguyen\Documents\Neumont Document\Q7\Capstone q7\Capstone1\Capstone1\obj\Debug\Capstone1.Properties.Resources.resources
 C:\Users\Kelvin Nguyen\Documents\Neumont Document\Q7\Capstone q7\Capstone1\Capstone1\obj\Debug\Capstone1.csproj.GenerateResource.Cache
+C:\Users\Kelvin Nguyen\Documents\Neumont Document\Q7\Capstone q7\Capstone1\Capstone1\bin\Debug\SoftwareKobo.Net.WebUtility.dll

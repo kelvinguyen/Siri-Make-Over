@@ -38,6 +38,9 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="SoftwareKobo.Net.WebUtility">
+      <HintPath>..\packages\SoftwareKobo.Net.WebUtility.1.0.4\lib\SoftwareKobo.Net.WebUtility.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -57,6 +60,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="KeywordEngine\KeywordResearcher.cs" />
+    <Compile Include="Metric\CombinationAndPermutation.cs" />
+    <Compile Include="Metric\ContentComparationMetric.cs" />
+    <Compile Include="SummaryEngine\FilterFactory.cs" />
+    <Compile Include="SummaryEngine\PageObject.cs" />
+    <Compile Include="SummaryEngine\PagesContainer.cs" />
+    <Compile Include="SummaryEngine\QuestionAnalysis.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -73,6 +83,7 @@
   <ItemGroup>
     <Compile Include="Model\ContentData.cs" />
     <Compile Include="Model\LinkObject.cs" />
+    <Compile Include="Model\SentenceFactory.cs" />
     <Compile Include="Model\WorkerClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
